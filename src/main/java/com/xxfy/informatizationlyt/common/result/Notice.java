@@ -4,7 +4,7 @@ public enum Notice{
 
     REQUEST_PARAMETER_IS_ERROR("请求参数错误", 201),
 
-    EXECUTE_IS_SUCCESS("操作成功", 233),
+    EXECUTE_IS_SUCCESS("操作成功", 200),
     EXECUTE_IS_FAILED("操作失败", 234),
 
     // 解析邮件相关 250-300
@@ -31,24 +31,26 @@ public enum Notice{
     ADDRESS_IS_ALREADY_EXIST("账户信息已存在", 901);
 
     private String message;
-    private int returnCode;
+    private int code;
 
-    private Notice(String message, int returnCode) {
+    Notice(String message, int code) {
         this.message = message;
-        this.returnCode = returnCode;
+        this.code = code;
     }
 
     public String getMessage() {
         return message;
     }
+
     public void setMessage(String message) {
         this.message = message;
     }
-    public int getReturnCode() {
-        return returnCode;
-    }
-    public void setReturnCode(int returnCode) {
-        this.returnCode = returnCode;
+
+    public int getCode() {
+        return code;
     }
 
+    public void setCode(int code) {
+        this.code = code;
+    }
 }

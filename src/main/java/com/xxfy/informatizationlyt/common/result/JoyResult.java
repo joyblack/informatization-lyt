@@ -1,23 +1,42 @@
 package com.xxfy.informatizationlyt.common.result;
 
-import java.io.Serializable;
+import lombok.Data;
+import lombok.ToString;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+@Data
+@ToString
 public class JoyResult implements Serializable {
+    private static final long serialVersionUID = -5607186023485351028L;
+
     private Boolean state;	//操作结果：bool
     private String message;	//返回信息：string
     private String detailMessage;	//返回信息：开发人员关注的信息
     private Object data = null;	//返回数据：object
-    private int returnCode;		//状态码：int
+    private int code;		//状态码：int
 
     private JoyResult(Notice notice, String detailMessage, Boolean state, Object data) {
         this.state = state;
         this.message = notice.getMessage();
-        this.returnCode = notice.getReturnCode();
+        this.code = notice.getCode();
         this.data = data;
         this.detailMessage = detailMessage;
     }
 
-    public static JoyResult buildSuccessResult(Object data){
+    public  Map<String, Object> convertToMap(){
+        Map<String, Object> result = new HashMap<>();
+        result.put("state", this.state);
+        result.put("message", this.message);
+        result.put("detailMessage", this.detailMessage);
+        result.put("code", this.code);
+        result.put("data", this.data);
+        return result;
+    }
+
+    public static JoyResult buildSuccessResultWithData(Object data){
         return new JoyResult(Notice.EXECUTE_IS_SUCCESS,
                 "",
                 true,
@@ -66,54 +85,7 @@ public class JoyResult implements Serializable {
     }
 
 
-    public Boolean getState() {
-        return state;
-    }
 
-    public void setState(Boolean state) {
-        this.state = state;
-    }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getDetailMessage() {
-        return detailMessage;
-    }
-
-    public void setDetailMessage(String detailMessage) {
-        this.detailMessage = detailMessage;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
-
-    public int getReturnCode() {
-        return returnCode;
-    }
-
-    public void setReturnCode(int returnCode) {
-        this.returnCode = returnCode;
-    }
-
-    @Override
-    public String toString() {
-        return "JoyResult{" +
-                "state=" + state +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                ", returnCode=" + returnCode +
-                '}';
-    }
 
 }

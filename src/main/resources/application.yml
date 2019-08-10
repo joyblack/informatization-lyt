@@ -1,12 +1,25 @@
 server:
   port: 8090
   servlet:
-    context-path: /informatization-lyt
-
+    # v1 为版本号
+    context-path: /informatization-lyt/v1
 spring:
+  # 数据源配置
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/evaluation_system?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/informatization_lyt?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
     username: root
     password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
-
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # JPA配置
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+# JWT认证体系
+jwtparam:
+  issuer: ec8b63c05f999a15a8c8567002a560a8
+  audience: 541bee7d2a922cc0a81ff4ca3c23f4af
+  TTLMillis: 3600000
+  base64Security: JXU4RDM1JXU3MTY0JXU4QkJFJXU4QkEx1

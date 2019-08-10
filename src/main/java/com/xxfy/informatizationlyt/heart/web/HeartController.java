@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping(SystemConstant.API_VERSION + "heart")
+@RequestMapping("heart")
 public class HeartController {
     /**
      * 测试心跳
